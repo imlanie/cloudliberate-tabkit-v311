@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if auth == '200' %}
+
+<body>
+
+    <div class="wider-container">
+        <div class="container-label">
+            <h2>Current Announcement</h2>
+        </div>
+
+        <ul>
+            <!--li>Theme: {{ user_pref['theme'] }}</li>
+            <li>Audio Language: {{ user_pref['pref_language'] }} </li-->
+            <li>Announcement: {{ user_pref['announce'] }} </li>
+        </ul>
+
+        <form autocomplete="off" method="post" action="user">
+            <br>
+
+            </br>
+            <label class="lblAnnounce" for="announce">Updated Announcement</label>
+            <br>
+            <textarea id="announce" name="HTMLAnnounce" value="" rows="20" cols="50">
+                </textarea>
+            <br>
+            <input id="my_submit" type="submit" value="Submit">
+        </form>
+
+
+    </div>
+
+    <br>
+    <br>
+
+    {% else %}
+
+    <div class="container">
+
+        <h3 class="high-alert">User credentials have expired. Please login again...</h3>
+
+        <form autocomplete="off" method="post" action="auth">
+            <label class="pwdlabel" for="email">Email</label>
+            <input id="email" type="text" name="HTMLControlEmail" value="{{ email }}"><br>
+
+            <span><label class="pwdlabel" for="password">Password (show/hide) &nbsp;&nbsp;</label><input id="checkbox"
+                    type="checkbox" onclick="myFunction()"></span>
+            <input id="password" type="password" name="HTMLControlPassword" value="{{ password }}">
+            </br>
+            <input id="my_submit" type="submit" value="Submit">
+        </form>
+
+    </div>
+
+
+    {% endif %}
+
+    {% endblock %}

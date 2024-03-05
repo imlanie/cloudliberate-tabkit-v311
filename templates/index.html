@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if auth == '200' %}
+
+
+<div class="container">
+
+    <br>
+
+    <!--  dict_menu is created in lambda_function.py  -->
+    {% for x, y in dict_menu.items() %}
+
+    <form id="{{ x }}" action="{{ x }}" method="POST">
+        <label for="submit"></label>
+        <input type="submit" value="{{ y }}">
+
+    </form>
+
+    {% endfor %}
+
+    {% for x, y in customer_menu.items() %}
+
+    <form id="{{ x }}" onsubmit={{y}}>
+        <label for="submit"></label>
+        <input type="submit" value="{{ x }}">
+
+    </form>
+
+    {% endfor %}
+
+
+
+</div>
+
+{% else %}
+
+<div class="container">
+
+    <h3 class="high-alert">User credentials have expired. Please login again...</h3>
+
+    <form autocomplete="off" method="post" action="auth">
+        <label class="pwdlabel" for="email">Email</label>
+        <input id="email" type="text" name="HTMLControlEmail" value="{{ email }}"><br>
+
+        <span><label class="pwdlabel" for="password">Password (show/hide) &nbsp;&nbsp;</label><input id="checkbox"
+                type="checkbox" onclick="myFunction()"></span>
+        <input id="password" type="password" name="HTMLControlPassword" value="{{ password }}">
+        </br>
+        <input id="my_submit" type="submit" value="Submit">
+    </form>
+
+</div>
+
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if auth == '200' %}
+
+<body>
+
+    <div class="container">
+
+        <div class="container-label">
+            <h3>Run Automation</h3>
+            <br>
+
+            <form action="upload" method="POST" enctype="multipart/form-data">
+
+                <label for="user_file"></label>
+
+                <input type="file" name="user_file"> &nbsp;
+
+                <input id="my_submit" type="submit" value="Upload">
+            </form>
+
+
+            <form action="automation" method="POST">
+                <h3>Set the Fuzz Factor</h3>
+                <div class="range_wrapper">
+                    <input id="slider" name="sliderFuzzFactor" type="range" min="50" max="99" default="80"
+                        oninput="showVal(this.value)" onchange="showVal(this.value)" step="1" value="0">
+                    <div id="valBox" class="valBox">50</div>
+
+                </div>
+
+                <br>
+
+                <input id="my_submit" type="submit" value="Run Automation">
+
+            </form>
+
+        </div>
+
+
+
+
+    </div>
+
+    {% else %}
+
+    <div class="container">
+
+        <h3 class="high-alert">User credentials have expired. Please login again...</h3>
+
+        <form autocomplete="off" method="post" action="auth">
+            <label class="pwdlabel" for="email">Email</label>
+            <input id="email" type="text" name="HTMLControlEmail" value="{{ email }}"><br>
+
+            <span><label class="pwdlabel" for="password">Password (show/hide) &nbsp;&nbsp;</label><input id="checkbox"
+                    type="checkbox" onclick="myFunction()"></span>
+            <input id="password" type="password" name="HTMLControlPassword" value="{{ password }}">
+            </br>
+            <input id="my_submit" type="submit" value="Submit">
+        </form>
+
+    </div>
+
+
+    {% endif %}
+
+    {% endblock %}
+
+
+    <br>
+    <br>

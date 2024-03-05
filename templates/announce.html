@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if auth == '200' %}
+
+<div class="container">
+
+    <h2>
+        <script>document.write(new Date().toLocaleDateString());</script>
+    </h2>
+    <h3>Announcements</h3>
+
+    <p>{{ msg }}</p>
+
+    <p>
+        <audio controls>
+            <source src="https://imlanie.s3.us-west-2.amazonaws.com/speech.mp3" type="audio/mpeg">
+        </audio>
+    </p>
+
+    <form id="home" action="dashboard" method="GET">
+        <label for="submit"></label>
+        <input type="submit" value="Return to Launchpad">
+    </form>
+
+    <!--p>Your personalized work day companion</p>
+    <h3>Welcome: {{ session['user_email'] }} </h3-->
+
+
+
+
+</div>
+
+{% else %}
+
+<div class="container">
+
+    <h3 class="high-alert">User credentials have expired. Please login again...</h3>
+
+    <form autocomplete="off" method="post" action="auth">
+        <label class="pwdlabel" for="email">Email</label>
+        <input id="email" type="text" name="HTMLControlEmail" value="{{ email }}"><br>
+
+        <span><label class="pwdlabel" for="password">Password (show/hide) &nbsp;&nbsp;</label><input id="checkbox"
+                type="checkbox" onclick="myFunction()"></span>
+        <input id="password" type="password" name="HTMLControlPassword" value="{{ password }}">
+        </br>
+        <input id="my_submit" type="submit" value="Submit">
+    </form>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Charmonman&display=swap" rel="stylesheet">
+    <link href="https://cloud-liberate.s3.us-west-2.amazonaws.com/cloudliberate-tabkit-template/styles-template.css"
+        type="text/css" rel="stylesheet">
+    <!--Agbalumo-->
+
+    <script>
+
+        function showVal(val) {
+            document.getElementById("valBox").innerHTML = val;
+        }
+
+
+        //  this is for lottie files
+        //https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js
+
+        /*https://www.geeksforgeeks.org/how-to-switch-between-multiple-css-stylesheets-using-javascript/
+        <button onclick="toggleTheme()">Switch</button> */
+
+
+        //moz-extension://368710df-4c55-4e47-a19e-6e4d9711bd68/newtab.html
+
+        function openMozTasks() {
+            var url = 'moz-extension://368710df-4c55-4e47-a19e-6e4d9711bd68/newtab.html';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+        function openNewWindow() {
+            var url = 'https://sswexas5skebyls7hcxiddplra0pgwnn.lambda-url.us-west-2.on.aws/';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+        function openZelle() {
+            var url = 'https://www.zellepay.com';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+        function openGoogleMeet() {
+            var url = 'https://meet.google.com';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+
+        function openGoogleMaps() {
+            var url = 'https://maps.google.com/maps?authuser=0';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+
+        function openSchedule() {
+            var url = 'https://calendar.google.com/calendar/u/0/r?pli=1';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+        function openTasks() {
+            var url = 'https://calendar.google.com/calendar/u/0/r?opentasks=1';
+            const windowFeatures = 'width=600,height=500,top=' + (window.innerHeight / 2 - 200) + ',left=' + (window.innerWidth / 2 - 400);
+            window.open(url, '_blank', windowFeatures);
+        }
+
+
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+
+        var draggable = document.getElementById('draggable');
+        var droppable = document.getElementById('droppable');
+
+        draggable.addEventListener('dragstart', function (event) {
+            event.dataTransfer.setData('text/plain', event.target.id);
+        });
+
+        droppable.addEventListener('drop', function (event) {
+            event.preventDefault();
+
+            var data = event.dataTransfer.getData('text/plain');
+            var draggedElement = document.getElementById(data);
+
+            droppable.appendChild(draggedElement);
+        });
+
+    </script>
+    <title>{% block title %}TabKit{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="https://imlanie.s3.us-west-2.amazonaws.com/images/favicon.ico">
+</head>
+
+<body>
+
+
+    <!--div class="header-r">
+        <div class="topnav">
+            <a href="#home"></a>
+
+
+            <div id="myLinks">
+        <a href="{{ session['env'] }}/user">Announcements</a>
+                <a href="{{ url_for('user') }}">User Preferences</a>
+
+        <p>{{ session['env'] }}</p>
+
+    </div>
+
+            <a href="javascript:void(0);" class="icon" onclick="myMenuFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div-->
+
+    <div class="topleft">
+
+        <br> &nbsp;&nbsp;&nbsp; <a href="https://store92631147.company.site/" target="_blank">
+            <img src="https://cloud-liberate.s3.us-west-2.amazonaws.com/images/TabKit2.jpg" width="40px" height="20px"
+                alt="Cloud Liberate"></a>
+        <br>
+
+    </div>
+    </div>
+
+
+
+
+
+    <!--div class="header">
+
+                                <creattie-embed src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/17719/bgSeZjjBxMvgAjik.json" delay="1"
+                                    speed="100" frame_rate="24" trigger="loop" style="width:150px;background-color:">
+                                </creattie-embed>
+                                <script src="https://creattie.com/js/embed.js?id=f7cbe9971016b6ca62b5" defer></script>
+
+
+                            </div-->
+
+
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+    <br>
+    <br>
+
+    <div class="footer">
+        <p text-align="center">User: &nbsp;
+            {{ session['user_email'] }} &nbsp;&nbsp;
+            Session Time Remaining: &nbsp; {{ session['time_remaining'] }} &nbsp;&nbsp; {{ session['authorized'] }}
+            &copy;
+            <script>document.write(new Date().getFullYear());</script>, TabKit by CloudLiberate. All rights
+            reserved.
+
+            &nbsp;&nbsp; <a href="/Prod/user" target="_blank">
+                <img src="https://imlanie.s3.us-west-2.amazonaws.com/images/icononly_transparent_nobuffer.png"
+                    width="26px" height="18px" alt="Cloud Liberate"></a> &nbsp;
+
+
+        </p>
+
+    </div>
+
+    <script>
+        function myMenuFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

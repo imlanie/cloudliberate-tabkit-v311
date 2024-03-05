@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if options=='return to login' %}
+
+<div class="container">
+    <h3> {{ notice_msg }}</h3>
+    <form id="delSessionEmail" action="login" method="POST">
+        <label for="submit"></label>
+        <input type="submit" value="Return to Login">
+    </form>
+</div>
+
+{% elif options=='return to home' %}
+
+<div class="container">
+    <h3> {{ notice_msg }}</h3>
+    <form id="home" action="dashboard" method="GET">
+        <label for="submit"></label>
+        <input type="submit" value="Return to Launchpad">
+    </form>
+</div>
+
+{% else %}
+
+<div class="container">
+    <h3> {{ notice_msg }}</h3>
+
+</div>
+
+{% endif %}
+
+
+
+{% endblock %}

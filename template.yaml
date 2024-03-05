@@ -1,0 +1,298 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Serverless Specification template describing your function.
+
+Resources:
+  CloudLiberateTabkitV311:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Description: CloudLiberate TabKit V311
+      MemorySize: 128
+      Timeout: 300
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      EventInvokeConfig:
+        MaximumEventAgeInSeconds: 900
+        MaximumRetryAttempts: 0
+      EphemeralStorage:
+        Size: 512
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /auth
+            Method: GET
+           
+        Api2:
+          Type: Api
+          Properties:     
+            Path: /dashboard
+            Method: GET
+           
+        Api3:
+          Type: Api
+          Properties:      
+            Path: /dashboard
+            Method: POST
+           
+        Api4:
+          Type: Api
+          Properties:       
+            Path: /announce
+            Method: GET
+           
+        Api5:
+          Type: Api
+          Properties:      
+            Path: /announce
+            Method: POST
+           
+        Api6:
+          Type: Api
+          Properties:      
+            Path: /notice
+            Method: GET
+           
+        Api7:
+          Type: Api
+          Properties:
+            Path: /notice
+            Method: POST
+           
+        Api8:
+          Type: Api
+          Properties:       
+            Path: /user
+            Method: GET
+           
+        Api9:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: POST
+
+        Api10:
+          Type: Api
+          Properties:
+            Path: /about
+            Method: GET
+           
+        Api11:
+          Type: Api
+          Properties:   
+            Path: /automation
+            Method: GET
+           
+        Api12:
+          Type: Api
+          Properties:        
+            Path: /automation
+            Method: POST
+
+        Api15:
+          Type: Api
+          Properties:
+            Path: /upload
+            Method: POST
+
+        Api16:
+          Type: Api
+          Properties:
+            Path: /upload
+            Method: GET
+
+        Api17:
+          Type: Api
+          Properties:
+            Path: /upload_files
+            Method: POST
+
+        Api18:
+          Type: Api
+          Properties:
+            Path: /upload_files
+            Method: GET
+
+                
+        Api19:
+          Type: Api
+          Properties:
+            Path: /bedrock
+            Method: POST
+
+        Api20:
+          Type: Api
+          Properties:
+            Path: /bedrock
+            Method: GET
+           
+     
+      Environment:
+        Variables:
+          S3_BUCKET: cloud-liberate
+          S3_BUCKET_FOLDER: tabkit-menus/
+          API_GATEWAY_ID: TBD
+          COGNITO_DOMAIN: https://cloudliberate.auth.us-west-2.amazoncognito.com
+          COGNITO_HOST_UI_ID: 3qsutnlt5roanhv1bmv54vvm4r
+          COGNITO_HOST_UI_SECRET_NAME: cloudliberate-client-secret-default
+          COGNITO_USER_POOL_ID: us-west-2_t0HXkUENA
+          CODE_VERSION:  V20240305-311
+      Layers:
+        - arn:aws:lambda:us-west-2:351174465723:layer:layer-flask-website:10
+        - >-
+          arn:aws:lambda:us-west-2:351174465723:layer:python-flask-security-layer:3
+        - arn:aws:lambda:us-west-2:351174465723:layer:tabkit-extras:4
+        - arn:aws:lambda:us-west-2:351174465723:layer:audio:1
+      RuntimeManagementConfig:
+        UpdateRuntimeOn: Auto
+      SnapStart:
+        ApplyOn: None
+      PackageType: Zip
+      Policies:
+        - Statement:
+            - Sid: VisualEditor0
+              Effect: Allow
+              Action:
+                - lambda:InvokeFunctionUrl
+                - lambda:InvokeFunction
+                - polly:SynthesizeSpeech
+              Resource:
+                - arn:aws:lambda:us-west-2:351174465723:function:CloudLiberateTabKit*
+                - arn:aws:lambda:*:351174465723:function:domain-scanner
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+              Resource: arn:aws:logs:us-west-2:351174465723:*
+            - Effect: Allow
+              Action:
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource:
+                - >-
+                  arn:aws:lambda:us-west-2:351174465723:function:CloudLiberateTabKit*
+            - Effect: Allow
+              Action:
+                - cognito-idp:AdminInitiateAuth
+                - cognito-idp:AdminGetUser
+              Resource:
+                - >-
+                  arn:aws:cognito-idp:us-west-2:351174465723:userpool/us-west-2_EYTPAUkq5
+            - Effect: Allow
+              Action:
+                - polly:*
+                - translate:*
+                - s3:*
+              Resource: '*'
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunctionUrl
+              Resource:
+                - arn:aws:lambda:us-west-2:351174465723:function:CloudLiberateTabKit*
+              Condition:
+                StringEquals:
+                  lambda:FunctionUrlAuthType: AWS_IAM
+            - Effect: Allow
+              Action:
+                - secretsmanager:*
+                - cloudformation:CreateChangeSet
+                - cloudformation:DescribeChangeSet
+                - cloudformation:DescribeStackResource
+                - cloudformation:DescribeStacks
+                - cloudformation:ExecuteChangeSet
+                - docdb-elastic:GetCluster
+                - docdb-elastic:ListClusters
+                - ec2:DescribeSecurityGroups
+                - ec2:DescribeSubnets
+                - ec2:DescribeVpcs
+                - kms:DescribeKey
+                - kms:ListAliases
+                - kms:ListKeys
+                - lambda:ListFunctions
+                - rds:DescribeDBClusters
+                - rds:DescribeDBInstances
+                - redshift:DescribeClusters
+                - tag:GetResources
+              Resource: '*'
+            - Effect: Allow
+              Action:
+                - lambda:AddPermission
+                - lambda:CreateFunction
+                - lambda:GetFunction
+                - lambda:InvokeFunction
+                - lambda:UpdateFunctionConfiguration
+              Resource: arn:aws:lambda:*:*:function:SecretsManager*
+            - Effect: Allow
+              Action:
+                - serverlessrepo:CreateCloudFormationChangeSet
+                - serverlessrepo:GetApplication
+              Resource: arn:aws:serverlessrepo:*:*:applications/SecretsManager*
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource:
+                - arn:aws:s3:::awsserverlessrepo-changesets*
+                - arn:aws:s3:::secrets-manager-rotation-apps-*/*
+            - Action:
+                - cloudwatch:DeleteAlarms
+                - cloudwatch:DescribeAlarmHistory
+                - cloudwatch:DescribeAlarms
+                - cloudwatch:DescribeAlarmsForMetric
+                - cloudwatch:GetMetricStatistics
+                - cloudwatch:ListMetrics
+                - cloudwatch:PutMetricAlarm
+                - cloudwatch:GetMetricData
+                - iam:GetRole
+                - iam:ListRoles
+                - kms:DescribeKey
+                - kms:ListAliases
+                - lambda:CreateFunction
+                - lambda:ListFunctions
+                - lambda:ListEventSourceMappings
+                - lambda:CreateEventSourceMapping
+                - lambda:DeleteEventSourceMapping
+                - lambda:GetFunctionConfiguration
+                - lambda:DeleteFunction
+                - resource-groups:ListGroups
+                - resource-groups:ListGroupResources
+                - resource-groups:GetGroup
+                - resource-groups:GetGroupQuery
+                - resource-groups:DeleteGroup
+                - resource-groups:CreateGroup
+                - tag:GetResources
+              Effect: Allow
+              Resource: '*'
+            - Action:
+                - cloudwatch:GetInsightRuleReport
+              Effect: Allow
+              Resource: arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*
+            - Action:
+                - iam:PassRole
+              Effect: Allow
+              Resource: '*'
+              Condition:
+                StringLike:
+                  iam:PassedToService:
+                    - application-autoscaling.amazonaws.com
+                    - application-autoscaling.amazonaws.com.cn
+                    - dax.amazonaws.com
+            - Effect: Allow
+              Action:
+                - iam:CreateServiceLinkedRole
+              Resource: '*'
+              Condition:
+                StringEquals:
+                  iam:AWSServiceName:
+                    - replication.dynamodb.amazonaws.com
+                    - dax.amazonaws.com
+                    - dynamodb.application-autoscaling.amazonaws.com
+                    - contributorinsights.dynamodb.amazonaws.com
+                    - kinesisreplication.dynamodb.amazonaws.com
+            - Effect: Allow
+              Action:
+                - s3:*
+                - s3-object-lambda:*
+              Resource: '*'
+
